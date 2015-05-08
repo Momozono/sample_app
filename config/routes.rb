@@ -1,10 +1,14 @@
 SampleApp::Application.routes.draw do
 
   resources :users
+  resources :sessions, only: [:new, :create, :destroy] #onlyにしないとすべてのアクションがフルセットで追加されてしまう
 
   #get "users/new"
 
-  match '/signup', to: 'users#new',  via: 'get'
+  match '/signup', to: 'users#new',       via: 'get'
+
+  match '/signin', to: 'sessions#new',    via: 'get' #/signinでも/sessions/newでもどちらでもいいが当然見た目がすっきりしている/signinを使用する
+  match '/signout',to: 'sessions#destroy',via: 'delete'
   #get "static_pages/home"
   #get "static_pages/help"
   #get "static_pages/about"

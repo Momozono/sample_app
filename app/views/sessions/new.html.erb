@@ -1,0 +1,25 @@
+<% provide(:title, 'Sign in')%>
+<h1>Sign in</h1>
+
+<div class="row">
+	<div class="span6 offset3">
+		<%= form_for(:session, url: sessions_path) do |f| %> <%# sessionモデルが無いからsessionインスタンスが作れないが、%>
+															 <%# そういった時でもform_forは対応してくれて %>
+														     <%# @usersの時は勝手に中身がUserモデルクラスのインスタンスだとわかってくれたが、%>
+															 <%# 今回はsessionモデルが無い事もform_forは勝手に認識してくれる。 %>
+															 <%# ただ引数の渡し方が変わるのでその点だけは注意 %>
+															 <%# form_for(:session)で渡して作成したフォームデータはparams[:sessions][:email] %>
+															 <%# などでコントローラで扱う事が出来る %>
+
+			<%= f.label :email %>
+			<%= f.text_field :email %>
+
+			<%= f.label :password %>
+			<%= f.password_field :password %>
+
+			<%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
+		<% end %>
+
+		<p>New user? <%= link_to "Sign up now!", signup_path %></p>
+	</div>
+</div>

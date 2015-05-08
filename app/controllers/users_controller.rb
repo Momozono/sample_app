@@ -12,6 +12,7 @@ class UsersController < ApplicationController
     	@user = User.new(user_params) #同ファイル内で定義したprivateのuser_paramsメソッドで限られたパラメータのみフォームで受け取っている
     								  #こうすることによりadminパラメータなどをブロックしている。
     	if @user.save
+            sign_in @user
     		flash[:success] = "Welcome to the Sample App!!!"
     		redirect_to @user
     	else
@@ -26,3 +27,5 @@ class UsersController < ApplicationController
     	#ここでStrong Parameterの概念を取り込んでいる。必要なパラメータのみ与えている。
     end
 end
+
+
