@@ -11,6 +11,7 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])
+        @microposts = @user.microposts.paginate(page: params[:page]) 
 	end
 
     def destroy
@@ -56,12 +57,15 @@ class UsersController < ApplicationController
         	#ここでStrong Parameterの概念を取り込んでいる。必要なパラメータのみ与えている。
         end
         #Before actions
+        
+=begin
         def signed_in_user #サインインしているか？
             unless signed_in?
                 store_location
                 redirect_to signin_url, notice: "Please sign in."
             end
         end
+=end
 
         def correct_user #サインインしているのは本人か？
             @user = User.find(params[:id])

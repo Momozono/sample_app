@@ -2,7 +2,7 @@ SampleApp::Application.routes.draw do
 
   resources :users
   resources :sessions, only: [:new, :create, :destroy] #onlyにしないとすべてのアクションがフルセットで追加されてしまう
-
+  resources :microposts, only: [:create, :destroy]
   #get "users/new"
 
   match '/signup', to: 'users#new',       via: 'get'
